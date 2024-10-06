@@ -22,6 +22,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+    
+                bat "docker rm -f serviceregister-container"
+                 bat "docker rmi -f serviceregister-image"
                 bat "docker build -t serviceregister-image ."
                 bat "docker run -p 8761:8761 -d --name serviceregister-container serviceregister-image"
             }
